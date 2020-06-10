@@ -22,11 +22,16 @@ const setTimer = (duration) => {
 function trackUserHandler() {
   let positionData;
   getPosition()
-    .then((postData) => {
-      positionData = postData;
-      // console.log(postData)
-      return setTimer(2000);
-    })
+    .then(
+      (postData) => {
+        positionData = postData;
+        // console.log(postData)
+        return setTimer(2000);
+      },
+      (err) => {
+        console.log(err);
+      }
+    ) //or you can use a .catch() to handle errors
     .then((data) => {
       console.log(data, positionData);
     });
