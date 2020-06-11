@@ -19,27 +19,36 @@ const setTimer = (duration) => {
   return promise;
 };
 
-function trackUserHandler() {
-  let positionData;
-  getPosition()
-    .then(
-      (postData) => {
-        positionData = postData;
-        // console.log(postData)
-        return setTimer(2000);
-      },
-      (err) => {
-        console.log(err);
-      }
-    ) //or you can use a .catch() to handle errors
-    .then((data) => {
-      console.log(data, positionData);
-    });
-  setTimer(1000).then(() => {
-    console.log("Timer done!");
-  });
-  console.log("Clicked!... getting position...");
-}
+async function trackUserHandler() {
+  // let positionData;
+  // await getPosition()
+  let postData;
+  let timerDAta;
+  try {
+     postData = await getPosition()
+     timerData = await setTimer(2000);
+  } catch (error) {
+   console.log(error)
+  }
+   console.log(postData, timerData);
+    // .then(
+    //   (postData) => {
+    //     positionData = postData;
+    //     // console.log(postData)
+   
+      // },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // ) //or you can use a .catch() to handle errors
+    // .then((data) => {
+   
+    // });
+//   setTimer(1000).then(() => {
+//     console.log("Timer done!");
+//   });
+//   console.log("Clicked!... getting position...");
+// }
 
 button.addEventListener("click", trackUserHandler);
 
